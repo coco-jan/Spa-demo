@@ -3,7 +3,7 @@ function router() {
   const hash = window.location.hash || "#/home";
 
   if (hash === "#/home") {
-    app.innerHTML = "<h1>Home merge</h1>";
+    app.innerHTML = "<h1>Home merge</h1><p>Site-ul funcționează.</p>";
     return;
   }
 
