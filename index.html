@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPA Live</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    nav a {
+      margin-right: 12px;
+      text-decoration: none;
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#/home">Home</a>
+    <a href="#/books">Books</a>
+    <a href="#/about">About</a>
+    <a href="#/auction/1">Auction</a>
+  </nav>
+
+  <div id="app" style="margin-top:20px;"></div>
+
+  <script>
+    function router() {
+      const app = document.getElementById("app");
+      const hash = window.location.hash;
+
+      if (hash === "#/books") {
+        app.innerHTML = "<h1>Books</h1><p>Aici vezi lista de cărți.</p>";
+      } else if (hash === "#/about") {
+        app.innerHTML = "<h1>About</h1><p>Despre site.</p>";
+      } else if (hash.startsWith("#/auction/")) {
+        const id = hash.split("/")[2];
+        app.innerHTML = "<h1>Licitatie " + id + "</h1><p>Aici e pagina licitației.</p>";
+      } else {
+        app.innerHTML = "<h1>Home</h1><p>Bine ai venit!</p>";
+      }
+    }
+
+    window.addEventListener("hashchange", router);
+    router();
+  </script>
+
+</body>
+</html>
