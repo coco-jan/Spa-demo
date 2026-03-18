@@ -1,5 +1,4 @@
 const auctions = [
- const auctions = [
   {
     id: 1,
     title: "BMW M5 2020",
@@ -72,8 +71,8 @@ function renderAuctions() {
     <div class="grid">
       ${auctions.map(auction => `
         <div class="card">
-  <img class="car-image" src="${auction.image}" alt="${auction.title}" />
-  <h3>${auction.title}</h3>
+          <img class="car-image" src="${auction.image}" alt="${auction.title}" />
+          <h3>${auction.title}</h3>
           <p class="muted">${auction.description}</p>
           <div class="price">${auction.currentBid}€</div>
           <p class="timer">Timp rămas: ${formatRemaining(auction.endsAt - Date.now())}</p>
@@ -94,42 +93,42 @@ function renderAuctionDetails(id) {
   }
 
   return `
-  <div class="card">
-    <img class="car-image" src="${auction.image}" alt="${auction.title}" />
-    <span class="badge">Live auction</span>
-    <h1>${auction.title}</h1>
-    <p class="muted">${auction.description}</p>
-    <div class="price">Preț curent: <span id="currentBid">${auction.currentBid}</span>€</div>
-    <p class="timer">Timp rămas: <span id="timer">${formatRemaining(auction.endsAt - Date.now())}</span></p>
+    <div class="card">
+      <img class="car-image" src="${auction.image}" alt="${auction.title}" />
+      <span class="badge">Live auction</span>
+      <h1>${auction.title}</h1>
+      <p class="muted">${auction.description}</p>
+      <div class="price">Preț curent: <span id="currentBid">${auction.currentBid}</span>€</div>
+      <p class="timer">Timp rămas: <span id="timer">${formatRemaining(auction.endsAt - Date.now())}</span></p>
 
-    <label for="bidInput">Bid-ul tău</label>
-    <input
-      id="bidInput"
-      class="input"
-      type="number"
-      min="${auction.currentBid + auction.minStep}"
-      value="${auction.currentBid + auction.minStep}"
-    />
+      <label for="bidInput">Bid-ul tău</label>
+      <input
+        id="bidInput"
+        class="input"
+        type="number"
+        min="${auction.currentBid + auction.minStep}"
+        value="${auction.currentBid + auction.minStep}"
+      />
 
-    <div class="row">
-      <button class="btn" onclick="placeBid(${auction.id})">Plasează bid</button>
-      <a href="#/auctions"><button class="btn">Înapoi</button></a>
+      <div class="row">
+        <button class="btn" onclick="placeBid(${auction.id})">Plasează bid</button>
+        <a href="#/auctions"><button class="btn">Înapoi</button></a>
+      </div>
+
+      <h3>Istoric bid-uri</h3>
+      <ul id="bidHistory" class="list">
+        ${auction.bids.map(bid => `<li>${bid}</li>`).join("")}
+      </ul>
     </div>
+  `;
+}
 
-    <h3>Istoric bid-uri</h3>
-    <ul id="bidHistory" class="list">
-      ${auction.bids.map(bid => `<li>${bid}</li>`).join("")}
-    </ul>
-  </div>
-`;
-
-      
 function renderProfile() {
   return `
     <div class="card">
       <h1>Profil</h1>
-      <p><strong>Nume:</strong> Demo User</p>
-      <p><strong>Status:</strong> Verificat</p>
+      <p><strong>Nume:</strong> Alex Dealer</p>
+      <p><strong>Status:</strong> Verified Dealer</p>
       <p><strong>Bid-uri active:</strong> 3</p>
       <p><strong>Wallet:</strong> conectat</p>
     </div>
