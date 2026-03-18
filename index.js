@@ -94,13 +94,14 @@ function renderAuction(id) {
   }
 
   document.getElementById("app").innerHTML =
-    "<h1>" + a.title + "</h1>" +
-    "<p>Bid: <span id='price'>" + a.currentBid + "</span>€</p>" +
-    "<p>" + formatTime(a.endsAt - Date.now()) + "</p>" +
-    "<input id='bid' type='number'>" +
-    "<button onclick='bid(" + a.id + ")'>Bid</button>" +
-    "<ul id='bids'>" + bidsHtml + "</ul>";
-}
+  "<a href='#/auctions'>← Înapoi</a>" +
+
+  "<h1>" + a.title + "</h1>" +
+  "<p>Bid: <span id='price'>" + a.currentBid + "</span>€</p>" +
+  "<p>" + formatTime(a.endsAt - Date.now()) + "</p>" +
+  "<input id='bid' type='number'>" +
+  "<button onclick=\"window.location.hash='#/auctions'\">← Înapoi</button>" +
+  "<ul id='bids'>" + bidsHtml + "</ul>";
 
 // ================== BID ==================
 
