@@ -17,6 +17,12 @@ function router() {
     return;
   }
 
+  if (hash.startsWith("#/auction/")) {
+    const id = hash.split("/")[2];
+    app.innerHTML = `<h1>Licitatie ${id}</h1>`;
+    return;
+  }
+
   app.innerHTML = "<h1>404</h1>";
 }
 
