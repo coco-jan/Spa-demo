@@ -1,30 +1,34 @@
 const auctions = [
+ const auctions = [
   {
     id: 1,
-    title: "BMW Seria 5 2019",
-    description: "Diesel, automat, 190.000 km, stare foarte bună.",
-    currentBid: 8200,
-    minStep: 100,
-    endsAt: Date.now() + 1000 * 60 * 12,
-    bids: ["8200€ - User01"]
+    title: "BMW M5 2020",
+    description: "Full option, 600 CP, stare impecabilă.",
+    image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80",
+    currentBid: 25000,
+    minStep: 500,
+    endsAt: Date.now() + 1000 * 60 * 20,
+    bids: ["25000€ - User01"]
   },
   {
     id: 2,
-    title: "Audi A4 2018",
-    description: "Benzină, cutie automată, interior piele.",
-    currentBid: 9100,
-    minStep: 100,
-    endsAt: Date.now() + 1000 * 60 * 8,
-    bids: ["9100€ - User04"]
+    title: "Audi RS7 2021",
+    description: "Sportback, panoramic, interior premium.",
+    image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1200&q=80",
+    currentBid: 40000,
+    minStep: 1000,
+    endsAt: Date.now() + 1000 * 60 * 15,
+    bids: ["40000€ - User02"]
   },
   {
     id: 3,
-    title: "Mercedes C-Class 2017",
-    description: "Mașină import, acte complete, istoric service.",
-    currentBid: 10400,
-    minStep: 200,
-    endsAt: Date.now() + 1000 * 60 * 15,
-    bids: ["10400€ - User07"]
+    title: "Mercedes C63 AMG",
+    description: "V8, întreținută perfect, istoric complet.",
+    image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=80",
+    currentBid: 32000,
+    minStep: 500,
+    endsAt: Date.now() + 1000 * 60 * 10,
+    bids: ["32000€ - User03"]
   }
 ];
 
