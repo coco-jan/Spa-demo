@@ -72,7 +72,8 @@ function renderAuctions() {
     <div class="grid">
       ${auctions.map(auction => `
         <div class="card">
-          <h3>${auction.title}</h3>
+  <img class="car-image" src="${auction.image}" alt="${auction.title}" />
+  <h3>${auction.title}</h3>
           <p class="muted">${auction.description}</p>
           <div class="price">${auction.currentBid}€</div>
           <p class="timer">Timp rămas: ${formatRemaining(auction.endsAt - Date.now())}</p>
