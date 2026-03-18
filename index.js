@@ -94,35 +94,36 @@ function renderAuctionDetails(id) {
   }
 
   return `
-    <div class="card">
-      <span class="badge">Live auction</span>
-      <h1>${auction.title}</h1>
-      <p class="muted">${auction.description}</p>
-      <div class="price">Preț curent: <span id="currentBid">${auction.currentBid}</span>€</div>
-      <p class="timer">Timp rămas: <span id="timer">${formatRemaining(auction.endsAt - Date.now())}</span></p>
+  <div class="card">
+    <img class="car-image" src="${auction.image}" alt="${auction.title}" />
+    <span class="badge">Live auction</span>
+    <h1>${auction.title}</h1>
+    <p class="muted">${auction.description}</p>
+    <div class="price">Preț curent: <span id="currentBid">${auction.currentBid}</span>€</div>
+    <p class="timer">Timp rămas: <span id="timer">${formatRemaining(auction.endsAt - Date.now())}</span></p>
 
-      <label for="bidInput">Bid-ul tău</label>
-      <input
-        id="bidInput"
-        class="input"
-        type="number"
-        min="${auction.currentBid + auction.minStep}"
-        value="${auction.currentBid + auction.minStep}"
-      />
+    <label for="bidInput">Bid-ul tău</label>
+    <input
+      id="bidInput"
+      class="input"
+      type="number"
+      min="${auction.currentBid + auction.minStep}"
+      value="${auction.currentBid + auction.minStep}"
+    />
 
-      <div class="row">
-        <button class="btn" onclick="placeBid(${auction.id})">Plasează bid</button>
-        <a href="#/auctions"><button class="btn">Înapoi</button></a>
-      </div>
-
-      <h3>Istoric bid-uri</h3>
-      <ul id="bidHistory" class="list">
-        ${auction.bids.map(bid => `<li>${bid}</li>`).join("")}
-      </ul>
+    <div class="row">
+      <button class="btn" onclick="placeBid(${auction.id})">Plasează bid</button>
+      <a href="#/auctions"><button class="btn">Înapoi</button></a>
     </div>
-  `;
-}
 
+    <h3>Istoric bid-uri</h3>
+    <ul id="bidHistory" class="list">
+      ${auction.bids.map(bid => `<li>${bid}</li>`).join("")}
+    </ul>
+  </div>
+`;
+
+      
 function renderProfile() {
   return `
     <div class="card">
@@ -142,19 +143,21 @@ function placeBid(id) {
   const input = document.getElementById("bidInput");
   const value = Number(input.value);
 
-  if (!Number.isFinite(value)) {
+  if (!Number.isFinite(value) || value <= 0) {
     alert("Introdu o sumă validă.");
-    return;
-  }
-
-  const minimum = auction.currentBid + auction.minStep;
-  if (value < minimum) {
-    alert(`Bid-ul minim este ${minimum}€`);
     return;
   }
 
   if (auction.endsAt <= Date.now()) {
     alert("Licitația este închisă.");
+    return;
+  }
+
+  const minimum = auction.currentBid + auction.minStep;
+
+  if (value < minimum) {
+    alert(`Bid-ul minim este ${minimum}€`);
+    input.value = minimum;
     return;
   }
 
