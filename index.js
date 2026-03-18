@@ -1,5 +1,3 @@
-// ================== DATA ==================
-
 var auctions = [
   {
     id: 1,
@@ -23,8 +21,6 @@ var auctions = [
   }
 ];
 
-// ================== LOAD STORAGE ==================
-
 var saved = localStorage.getItem("auctions");
 if (saved) {
   auctions = JSON.parse(saved);
@@ -35,14 +31,13 @@ if (!localStorage.getItem("user")) {
   localStorage.setItem("user", name || "Guest");
 }
 
-// ================== HELPERS ==================
-
 function getAuctionById(id) {
   for (var i = 0; i < auctions.length; i++) {
     if (auctions[i].id == id) {
       return auctions[i];
     }
   }
+  return null;
 }
 
 function formatTime(ms) {
@@ -54,8 +49,6 @@ function formatTime(ms) {
 
   return m + "m " + s + "s";
 }
-
-// ================== PAGES ==================
 
 function renderHome() {
   document.getElementById("app").innerHTML =
@@ -94,16 +87,14 @@ function renderAuction(id) {
   }
 
   document.getElementById("app").innerHTML =
-  "<a href='#/auctions'>← Înapoi</a>" +
-
-  "<h1>" + a.title + "</h1>" +
-  "<p>Bid: <span id='price'>" + a.currentBid + "</span>€</p>" +
-  "<p>" + formatTime(a.endsAt - Date.now()) + "</p>" +
-  "<input id='bid' type='number'>" +
-  "<button onclick=\"window.location.hash='#/auctions'\">← Înapoi</button>" +
-  "<ul id='bids'>" + bidsHtml + "</ul>";
-
-// ================== BID ==================
+    "<a href='#/auctions'>← Înapoi</a>" +
+    "<h1>" + a.title + "</h1>" +
+    "<p>Bid: <span id='price'>" + a.currentBid + "</span>€</p>" +
+    "<p>" + formatTime(a.endsAt - Date.now()) + "</p>" +
+    "<input id='bid' type='number'>" +
+    "<button onclick='bid(" + a.id + ")'>Bid</button>" +
+    "<ul id='bids'>" + bidsHtml + "</ul>";
+}
 
 function bid(id) {
   var a = getAuctionById(id);
@@ -131,13 +122,12 @@ function bid(id) {
   localStorage.setItem("auctions", JSON.stringify(auctions));
 }
 
-// ================== ROUTER ==================
-
 function router() {
   if (!window.location.hash) {
-  window.location.hash = "#/home";
-}
-var hash = window.location.hash;
+    window.location.hash = "#/home";
+  }
+
+  var hash = window.location.hash;
 
   if (hash === "#/home") {
     renderHome();
@@ -146,6 +136,12 @@ var hash = window.location.hash;
 
   if (hash === "#/auctions") {
     renderAuctions();
+    return;
+  }
+
+  if (hash === "#/profile") {
+    document.getElementById("app").innerHTML =
+      "<h1>Profil</h1><p>User: " + (localStorage.getItem("user") || "Guest") + "</p>";
     return;
   }
 
