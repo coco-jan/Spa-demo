@@ -133,7 +133,10 @@ function bid(id) {
 // ================== ROUTER ==================
 
 function router() {
-  var hash = window.location.hash || "#/home";
+  if (!window.location.hash) {
+  window.location.hash = "#/home";
+}
+var hash = window.location.hash;
 
   if (hash === "#/home") {
     renderHome();
